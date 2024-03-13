@@ -10,11 +10,10 @@ class NotesViewBody extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16),
-            child: const CustomAppBar(),
-          ),
-        ],
+            CustomAppBar(),
+            NoteItem(),
+          ],
+        ),
       ),
     );
   }
