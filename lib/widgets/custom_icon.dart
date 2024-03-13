@@ -12,10 +12,13 @@ class CustomIcon extends StatelessWidget {
       height: 48.w,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.r),
       ),
-      child: const Center(
-        child: Icon(FontAwesomeIcons.magnifyingGlass),
+      child: Center(
+        child: IconButton(
+          icon: const Icon(FontAwesomeIcons.magnifyingGlass),
+          onPressed: () {},
+        ),
       ),
     );
   }
