@@ -9,7 +9,7 @@ class AddModelBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Container(
         // We can't use Spacer widget in SingleChildScrollView
         // SingleChildScrollView -> Shrink

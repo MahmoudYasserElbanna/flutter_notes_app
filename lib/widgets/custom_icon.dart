@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomIcon extends StatelessWidget {
-  const CustomIcon({super.key});
-
+  const CustomIcon({super.key, required this.icon});
+  final IconData icon;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +15,7 @@ class CustomIcon extends StatelessWidget {
       ),
       child: Center(
         child: IconButton(
-          icon: const Icon(FontAwesomeIcons.magnifyingGlass),
+          icon: Icon(icon),
           onPressed: () {},
         ),
       ),
