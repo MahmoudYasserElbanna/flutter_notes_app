@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:note_app/views/edit_note_view.dart';
 import 'package:note_app/views/notes_view.dart';
 
 void main() => runApp(const NotesApp());
@@ -16,8 +17,11 @@ class NotesApp extends StatelessWidget {
           brightness: Brightness.dark,
           fontFamily: 'Poppins',
         ),
-        home: const NotesView(),
-        // initialRoute: NotesView.id,
+        initialRoute: NotesView.id,
+        routes: {
+          NotesView.id: (context) => NotesView(),
+          EditNotesView.id: (context) => EditNotesView(),
+        },
       ),
       designSize: const Size(390, 840),
     );
