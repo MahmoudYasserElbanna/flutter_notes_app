@@ -12,19 +12,19 @@ class CustomButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          width: double.infinity,
-          height: 60,
+          width: MediaQuery.of(context).size.width,
+          height: 42,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: kPrimaryColor,
           ),
-          child: Center(
-            child: Text(
-              buttonLabel!,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
-              ),
+          child: Text(
+            textAlign: TextAlign.center,
+            buttonLabel!,
+            style: const TextStyle(
+              color: Color(0xFF3333333),
+              fontSize: 24,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
