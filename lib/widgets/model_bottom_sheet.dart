@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:note_app/widgets/custom_text_field.dart';
 
 class AddModelBottomSheet extends StatelessWidget {
@@ -9,9 +10,15 @@ class AddModelBottomSheet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        child: const Column(
+        child: Column(
           children: [
-            CustomTextField(labelText: 'Title'),
+            SizedBox(height: 32.h),
+            const CustomTextField(labelText: 'Title'),
+            SizedBox(height: 16.h),
+            const CustomTextField(
+              labelText: 'Content',
+              maxLines: 5,
+            ),
           ],
         ),
       ),
