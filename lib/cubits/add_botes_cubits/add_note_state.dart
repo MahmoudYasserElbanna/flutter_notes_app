@@ -10,7 +10,7 @@ class AddNoteLoading extends AddNoteState {}
 class AddNoteSuccess extends AddNoteState {}
 
 class AddNoteFailure extends AddNoteState {
-  final String? errMassage;
+  final String errMassage;
 
-  AddNoteFailure({this.errMassage});
+  AddNoteFailure({required this.errMassage});
 }
