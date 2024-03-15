@@ -19,8 +19,8 @@ class NotesApp extends StatelessWidget {
         ),
         initialRoute: NotesView.id,
         routes: {
-          NotesView.id: (context) => NotesView(),
-          EditNotesView.id: (context) => EditNotesView(),
+          NotesView.id: (context) => const NotesView(),
+          EditNotesView.id: (context) => const EditNotesView(),
         },
       ),
       designSize: const Size(390, 840),
