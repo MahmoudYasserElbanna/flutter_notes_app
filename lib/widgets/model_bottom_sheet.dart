@@ -61,9 +61,12 @@ class _AddNoteFormState extends State<AddNoteForm> {
           CustomButton(
             buttonLabel: 'Add',
             onTap: () {
+              // Check state of filed
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-              } else {
+              }
+              // if filed is empty return error massage
+              else {
                 autovalidateMode = AutovalidateMode.always;
                 setState(() {});
               }
