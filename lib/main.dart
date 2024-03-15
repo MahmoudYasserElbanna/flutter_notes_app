@@ -22,27 +22,29 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: (context, child) => MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => AddNotesCubit(),
+    return SafeArea(
+      child: ScreenUtilInit(
+        builder: (context, child) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AddNotesCubit(),
+            ),
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              brightness: Brightness.dark,
+              fontFamily: 'Poppins',
+            ),
+            initialRoute: NotesView.id,
+            routes: {
+              NotesView.id: (context) => const NotesView(),
+              EditNotesView.id: (context) => const EditNotesView(),
+            },
           ),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            brightness: Brightness.dark,
-            fontFamily: 'Poppins',
-          ),
-          initialRoute: NotesView.id,
-          routes: {
-            NotesView.id: (context) => const NotesView(),
-            EditNotesView.id: (context) => const EditNotesView(),
-          },
         ),
+        designSize: const Size(390, 840),
       ),
-      designSize: const Size(390, 840),
     );
   }
 }
