@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:note_app/constants.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({required this.buttonLabel, this.onTap});
+  const CustomButton({required this.buttonLabel, required this.onTap});
   final String? buttonLabel;
-  final VoidCallback? onTap;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
