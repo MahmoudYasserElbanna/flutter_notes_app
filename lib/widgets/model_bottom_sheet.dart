@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:note_app/widgets/custom_button.dart';
-import 'package:note_app/widgets/custom_text_field.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:note_app/cubits/add_botes_cubits/add_note_cubit.dart';
+import 'package:note_app/widgets/add_note_from.dart';
 
 class AddModelBottomSheet extends StatelessWidget {
   const AddModelBottomSheet({super.key});
@@ -14,66 +16,25 @@ class AddModelBottomSheet extends StatelessWidget {
         // We can't use Spacer widget in SingleChildScrollView
         // SingleChildScrollView -> Shrink
         // Spacer -> Expand
-        child: const SingleChildScrollView(
-          child: AddNoteForm(),
+        child: SingleChildScrollView(
+          child: BlocConsumer<AddNotesCubit, AddNoteState>(
+            listener: (context, state) {
+              // Switch between sates in UI
+              if (state is AddNoteFailure) {
+                print(('Failed ${state.errMassage}'));
+              }
+              if (state is AddNoteSuccess) {
+                Navigator.pop(context);
+              }
+            },
+            builder: (context, state) {
+              return ModalProgressHUD(
+                inAsyncCall: state is AddNoteLoading ? true : false,
+                child: const AddNoteForm(),
+              );
+            },
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class AddNoteForm extends StatefulWidget {
-  const AddNoteForm({
-    super.key,
-  });
-
-  @override
-  State<AddNoteForm> createState() => _AddNoteFormState();
-}
-
-class _AddNoteFormState extends State<AddNoteForm> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? title, content;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      autovalidateMode: autovalidateMode,
-      child: Column(
-        children: [
-          SizedBox(height: 24.h),
-          CustomFormTextField(
-            labelText: 'Title',
-            onSaved: (value) {
-              title = value;
-            },
-          ),
-          SizedBox(height: 16.h),
-          CustomFormTextField(
-            labelText: 'Content',
-            maxLines: 5,
-            onSaved: (value) {
-              content = value;
-            },
-          ),
-          SizedBox(height: 42.h),
-          CustomButton(
-            buttonLabel: 'Add',
-            onTap: () {
-              // Check state of filed
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
-              }
-              // if filed is empty return error massage
-              else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
-            },
-          ),
-          SizedBox(height: 16.h),
-        ],
       ),
     );
   }
