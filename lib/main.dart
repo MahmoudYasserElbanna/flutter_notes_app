@@ -12,8 +12,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   Bloc.observer = SimpleBlocObserver();
   await Hive.initFlutter();
-  await Hive.openBox(kPrimaryBox);
   Hive.registerAdapter(NoteModelAdapter());
+  // Failed HiveError: The box "note_box" is already open and of type Box<dynamic>
+  // Solve it by adding <datatype>
+  await Hive.openBox<NoteModel>(kPrimaryBox);
+
   runApp(const NotesApp());
 }
 
@@ -24,24 +27,17 @@ class NotesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: ScreenUtilInit(
-        builder: (context, child) => MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => AddNotesCubit(),
-            ),
-          ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              brightness: Brightness.dark,
-              fontFamily: 'Poppins',
-            ),
-            initialRoute: NotesView.id,
-            routes: {
-              NotesView.id: (context) => const NotesView(),
-              EditNotesView.id: (context) => const EditNotesView(),
-            },
+        builder: (context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            brightness: Brightness.dark,
+            fontFamily: 'Poppins',
           ),
+          initialRoute: NotesView.id,
+          routes: {
+            NotesView.id: (context) => const NotesView(),
+            EditNotesView.id: (context) => const EditNotesView(),
+          },
         ),
         designSize: const Size(390, 840),
       ),

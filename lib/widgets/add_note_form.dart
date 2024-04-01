@@ -49,7 +49,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 // Bloc Trigger
-                NoteModel note = NoteModel(
+                var note = NoteModel(
                   title: title!,
                   subtitle: content!,
                   date: DateTime.now().toString(),
