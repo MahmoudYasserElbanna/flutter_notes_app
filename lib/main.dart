@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:note_app/constants.dart';
-import 'package:note_app/cubits/add_botes_cubits/add_note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/views/bloc_observer.dart';
 import 'package:note_app/views/edit_note_view.dart';
@@ -16,7 +15,6 @@ void main() async {
   // Failed HiveError: The box "note_box" is already open and of type Box<dynamic>
   // Solve it by adding <datatype>
   await Hive.openBox<NoteModel>(kPrimaryBox);
-
   runApp(const NotesApp());
 }
 
