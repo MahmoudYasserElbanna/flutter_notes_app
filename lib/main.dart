@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:note_app/constants.dart';
+import 'package:note_app/cubits/add_notes_cubits/add_note_cubit.dart';
+import 'package:note_app/cubits/notes_cubit/note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/bloc_observer.dart';
 import 'package:note_app/views/edit_note_view.dart';
@@ -25,17 +27,20 @@ class NotesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: ScreenUtilInit(
-        builder: (context, child) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            brightness: Brightness.dark,
-            fontFamily: 'Poppins',
+        builder: (context, child) => BlocProvider(
+          create: (context) => NotesCubit(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              brightness: Brightness.dark,
+              fontFamily: 'Poppins',
+            ),
+            initialRoute: NotesView.id,
+            routes: {
+              NotesView.id: (context) => const NotesView(),
+              EditNotesView.id: (context) => const EditNotesView(),
+            },
           ),
-          initialRoute: NotesView.id,
-          routes: {
-            NotesView.id: (context) => const NotesView(),
-            EditNotesView.id: (context) => const EditNotesView(),
-          },
         ),
         designSize: const Size(390, 840),
       ),
